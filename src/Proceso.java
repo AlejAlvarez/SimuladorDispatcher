@@ -21,17 +21,48 @@ public class Proceso {
     private int tRetornoNorm;
     private int tListo;
     private int tServicio;
+    private int tIncorp;
+    private int tRafagaR;
+    private int hDesbloq;
+    private int hFinal;
+    private int rafagaytcp;
+    
 
     public Proceso(String nombre, int tArribo, int rafagasTotales, int duracionRafaga, int duracionES, int prioridad) {
         this.nombre = nombre;
         this.tArribo = tArribo;
         this.rafagasTotales = rafagasTotales;
+        rafagasRestantes = rafagasTotales;
         this.duracionRafaga = duracionRafaga;
         this.duracionES = duracionES;
         this.prioridad = prioridad;
         tServicio = rafagasTotales * duracionRafaga;
     }
 
+    public int getTIncorp() {
+        return tIncorp;
+    }
+
+    public void setTIncorp(int tip) {
+        tIncorp = tArribo + tip;
+    }
+
+    public int getHFinal() {
+        return hFinal;
+    }
+
+    public void setHFinal(int hFinal) {
+        this.hFinal = hFinal;
+    }
+
+    public int getDuracionES() {
+        return duracionES;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
     public int getRafagasRestantes() {
         return rafagasRestantes;
     }
@@ -45,7 +76,12 @@ public class Proceso {
     }
 
     public void setTRetorno(int tRetorno) {
-        this.tRetorno = tRetorno - tArribo;
+        hFinal = tRetorno;
+        this.tRetorno = tRetorno - tIncorp;
+    }
+    
+    public int getTRetornoCompleto(){
+        return tRetorno + tArribo;
     }
 
     public double calcularTRetornoNorm() {
@@ -63,6 +99,38 @@ public class Proceso {
     
     public void incrementarTListo(){
         this.tListo++;
+    }
+    
+    public void decrementarTRafagaR(){
+        this.tRafagaR--;
+    }
+    
+    public int getTRafagaR(){
+        return tRafagaR;
+    }
+    
+    public void nuevaRafaga(){
+        tRafagaR = rafagaytcp;
+    }
+
+    public int getHDesbloq() {
+        return hDesbloq;
+    }
+
+    public void setHDesbloq(int contador) {
+        this.hDesbloq = this.duracionES + contador;
+    }
+
+    public int getRafagaytcp() {
+        return rafagaytcp;
+    }
+
+    public void setRafagaytcp(int tcp) {
+        this.rafagaytcp = duracionRafaga + tcp;
+    }
+    
+    public void sumarTListo(int tfp){
+        tListo += tfp;
     }
     
     

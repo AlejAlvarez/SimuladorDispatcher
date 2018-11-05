@@ -1,7 +1,12 @@
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,20 +20,20 @@ import java.util.PriorityQueue;
  */
 public abstract class Estrategia {
     
-    protected int tip; //Tiempo para aceptar nuevos procesos
-    protected int tfp; //Tiempo para finalizar los procesos
-    protected int tcp; //Tiempo de conmutación entre procesos
-    protected int cpuDesocupada;
-    protected int cpuSO;
-    protected int cpuProcesos;
-    protected int ultimoTfp;
-    protected int cantProcesos;
-    protected int contador;
-    protected PriorityQueue<Proceso> pBloqueados;
-    protected PriorityQueue<Proceso> pNuevos;
-    protected List<Proceso> pListos;  //Esta variable se encontrará "Hidden", o escondida, en las clases Prioridad, SJF y SRT
-    protected List<Proceso> pFinalizados;
-    protected Proceso pEjecutando;
+    protected static int tip; //Tiempo para aceptar nuevos procesos
+    protected static int tfp; //Tiempo para finalizar los procesos
+    protected static int tcp; //Tiempo de conmutación entre procesos
+    protected static int cpuDesocupada;
+    protected static int cpuSO;
+    protected static int cpuProcesos;
+    protected static int ultimoTfp;
+    protected static int cantProcesos;
+    protected static int contador;
+    protected static PriorityQueue<Proceso> pBloqueados;
+    protected static PriorityQueue<Proceso> pNuevos;
+    protected static LinkedList<Proceso> pListos;  //Esta variable se encontrará "Hidden", o escondida, en las clases Prioridad, SJF y SRT
+    protected static LinkedList<Proceso> pFinalizados;
+    protected static Proceso pEjecutando;
     
 
     public Estrategia(int tip, int tfp, int tcp) {
@@ -42,8 +47,6 @@ public abstract class Estrategia {
         cantProcesos = 0;
         pFinalizados = new LinkedList<Proceso>();
         pListos = new LinkedList<Proceso>();
-        pBloqueados = new PriorityQueue<Proceso>();
-        pNuevos = new PriorityQueue<Proceso>();
     }
     
     public Estrategia(){
@@ -57,30 +60,87 @@ public abstract class Estrategia {
         cantProcesos = 0;
         pFinalizados = new LinkedList<Proceso>();
         pListos = new LinkedList<Proceso>();
-        pBloqueados = new PriorityQueue<Proceso>();
-        pNuevos = new PriorityQueue<Proceso>();
     }
     
-    protected void leerArchivo(){
-        //IMPLEMENTAR: LEER SOBRE ARCHIVOS JAVA
-        //LEER SOBRE STRINGTOKENIZER
+    protected void leerArchivo(File f){
+        try{
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            String cadena;
+            while((cadena=br.readLine())!=null){
+                StringTokenizer st = new StringTokenizer(cadena);
+                String nombre = (st.nextToken());
+                int tArribo = Integer.parseInt(st.nextToken());
+                int rafagasTotales = Integer.parseInt(st.nextToken());
+                int duracionRafaga = Integer.parseInt(st.nextToken());
+                int duracionES = Integer.parseInt(st.nextToken());
+                int prioridad = Integer.parseInt(st.nextToken());
+                Proceso p = new Proceso(nombre, tArribo, rafagasTotales, duracionRafaga, duracionES, prioridad); //Lectura e instancia del proceso
+                p.setTIncorp(tip);
+                p.setRafagaytcp(tcp);
+                pNuevos.add(p);
+                cantProcesos++;
+            }
+            System.out.println("Lectura del archivo completada con Éxito!");
+            cpuSO += tip*cantProcesos + tfp*cantProcesos;
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
     
     protected void enlistarProceso(Proceso p){
         pListos.add(p);
     }
     
-    protected void ejecutarProceso(Proceso p){
-        pListos.remove(p);
-        pEjecutando = p;
+    protected void enlistarProceso(){
+        pListos.add(pBloqueados.poll());
+    }
+    
+    protected void enlistarProcesoNuevo(){
+        pListos.add(pNuevos.poll());
+    }
+    
+    protected void ejecutarProceso(){
+        cpuSO += tcp;
+        pEjecutando = pListos.poll();
+        pEjecutando.nuevaRafaga();
+        pEjecutando.disminuirRafagasRestantes();
     }
     
     protected void finalizarProceso(){
+        pEjecutando.setTRetorno(contador + tfp);
+        pEjecutando.sumarTListo(tfp);
         pFinalizados.add(pEjecutando);
         pEjecutando = null;
     }
     
-    public abstract void ejecutar(/*ACA VA EL ARCHIVO BASE DE PROCESOS*/);
+    protected void bloquearProceso(){
+        pEjecutando.setHDesbloq(contador);
+        pBloqueados.add(pEjecutando);
+        pEjecutando = null;
+    }
+    
+    protected void incrementarTListoProcesos(){
+        for (int i = 0; i < pListos.size(); i++){
+            Proceso p = pListos.get(i);
+            p.incrementarTListo();
+        }
+    }
+    
+    protected double calcularTMedioRetorno(){
+        int suma = 0;
+        for (int i = 0; i < pFinalizados.size(); i++){
+            Proceso p = pFinalizados.get(i);
+            suma += p.getHFinal();
+        }
+        return suma / cantProcesos;
+    }
+    
+    public abstract void ejecutar(File f);
     
     public abstract void imprimirResultados(); //LEER SOBRE ARCHIVOS Y ESCRITURA DE LOS MISMOS
     
