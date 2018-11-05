@@ -29,21 +29,25 @@ public abstract class Estrategia {
     protected static int ultimoTfp;
     protected static int cantProcesos;
     protected static int contador;
+    //protected static int proximaEjec;
     protected static PriorityQueue<Proceso> pBloqueados;
     protected static PriorityQueue<Proceso> pNuevos;
     protected static LinkedList<Proceso> pListos;  //Esta variable se encontrará "Hidden", o escondida, en las clases Prioridad, SJF y SRT
     protected static LinkedList<Proceso> pFinalizados;
     protected static Proceso pEjecutando;
+    protected static String ultimoProcE;
     
 
-    public Estrategia(int tip, int tfp, int tcp) {
+    public Estrategia(int tip, int tcp, int tfp) {
         this.tip = tip;
-        this.tfp = tfp;
         this.tcp = tcp;
+        this.tfp = tfp;
+        //proximaEjec = 0;
         cpuDesocupada = 0;
         cpuSO = 0;
         cpuProcesos = 0;
         ultimoTfp = 0;
+        ultimoProcE = new String();
         cantProcesos = 0;
         pFinalizados = new LinkedList<Proceso>();
         pListos = new LinkedList<Proceso>();
@@ -51,12 +55,13 @@ public abstract class Estrategia {
     
     public Estrategia(){
         tip = 0;
-        tfp = 0;
         tcp = 0;
+        tfp = 0;
         cpuDesocupada = 0;
         cpuSO = 0;
         cpuProcesos = 0;
         ultimoTfp = 0;
+        ultimoProcE = new String();
         cantProcesos = 0;
         pFinalizados = new LinkedList<Proceso>();
         pListos = new LinkedList<Proceso>();
@@ -77,7 +82,6 @@ public abstract class Estrategia {
                 int prioridad = Integer.parseInt(st.nextToken());
                 Proceso p = new Proceso(nombre, tArribo, rafagasTotales, duracionRafaga, duracionES, prioridad); //Lectura e instancia del proceso
                 p.setTIncorp(tip);
-                p.setRafagaytcp(tcp);
                 pNuevos.add(p);
                 cantProcesos++;
             }
@@ -86,9 +90,11 @@ public abstract class Estrategia {
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
+            System.err.println("Archivo de texto no encontrado!");
         }
         catch (IOException e){
             e.printStackTrace();
+            System.err.println("Error en la Entrada/Salida!");
         }
     }
     
@@ -107,19 +113,22 @@ public abstract class Estrategia {
     protected void ejecutarProceso(){
         cpuSO += tcp;
         pEjecutando = pListos.poll();
-        pEjecutando.nuevaRafaga();
+        ultimoProcE = pEjecutando.getNombre();
+        pEjecutando.nuevaRafaga(tcp);
         pEjecutando.disminuirRafagasRestantes();
     }
     
     protected void finalizarProceso(){
         pEjecutando.setTRetorno(contador + tfp);
-        pEjecutando.sumarTListo(tfp);
+        ultimoProcE = pEjecutando.getNombre();
+        pEjecutando.sumarTListoTfp(tfp);
         pFinalizados.add(pEjecutando);
         pEjecutando = null;
     }
     
     protected void bloquearProceso(){
         pEjecutando.setHDesbloq(contador);
+        ultimoProcE = pEjecutando.getNombre();
         pBloqueados.add(pEjecutando);
         pEjecutando = null;
     }
@@ -131,6 +140,13 @@ public abstract class Estrategia {
         }
     }
     
+    protected void ejecutarProcesoAnterior(){
+        pEjecutando = pListos.poll();
+        ultimoProcE = pEjecutando.getNombre();
+        pEjecutando.nuevaRafaga();
+        pEjecutando.disminuirRafagasRestantes();       
+    }
+    
     protected double calcularTMedioRetorno(){
         int suma = 0;
         for (int i = 0; i < pFinalizados.size(); i++){
@@ -138,6 +154,10 @@ public abstract class Estrategia {
             suma += p.getHFinal();
         }
         return suma / cantProcesos;
+    }
+    
+    protected double calcularPorcentajeUsoCPU(){
+        return ((cpuProcesos / ultimoTfp)*100);
     }
     
     public abstract void ejecutar(File f);

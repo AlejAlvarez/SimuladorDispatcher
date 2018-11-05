@@ -15,7 +15,7 @@ public class MainTest {
     
     public static void main (String[] args){
         Estrategia fcfs = new FCFS(1, 1, 1);
-        File f = new File("archivo.txt");
+        File f = new File("tanda1.txt");
         fcfs.ejecutar(f);
     }
     

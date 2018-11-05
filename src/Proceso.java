@@ -25,7 +25,6 @@ public class Proceso {
     private int tRafagaR;
     private int hDesbloq;
     private int hFinal;
-    private int rafagaytcp;
     
 
     public Proceso(String nombre, int tArribo, int rafagasTotales, int duracionRafaga, int duracionES, int prioridad) {
@@ -80,10 +79,6 @@ public class Proceso {
         this.tRetorno = tRetorno - tIncorp;
     }
     
-    public int getTRetornoCompleto(){
-        return tRetorno + tArribo;
-    }
-
     public double calcularTRetornoNorm() {
         tRetornoNorm = tRetorno / tServicio;
         return tRetornoNorm;
@@ -110,7 +105,11 @@ public class Proceso {
     }
     
     public void nuevaRafaga(){
-        tRafagaR = rafagaytcp;
+        tRafagaR = duracionRafaga;
+    }
+    
+    public void nuevaRafaga(int tcp){
+        tRafagaR = duracionRafaga + tcp;
     }
 
     public int getHDesbloq() {
@@ -120,18 +119,11 @@ public class Proceso {
     public void setHDesbloq(int contador) {
         this.hDesbloq = this.duracionES + contador;
     }
-
-    public int getRafagaytcp() {
-        return rafagaytcp;
-    }
-
-    public void setRafagaytcp(int tcp) {
-        this.rafagaytcp = duracionRafaga + tcp;
-    }
     
-    public void sumarTListo(int tfp){
+    public void sumarTListoTfp(int tfp){
         tListo += tfp;
     }
+
     
     
 }
