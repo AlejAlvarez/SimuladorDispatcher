@@ -14,8 +14,8 @@ import java.io.File;
 public class MainTest {
     
     public static void main (String[] args){
-        Estrategia fcfs = new FCFS(1, 1, 1);
-        File f = new File("tanda1.txt");
+        Estrategia fcfs = new FCFS(0, 0, 0);
+        File f = new File("tanda4.txt");
         fcfs.ejecutar(f);
     }
     
