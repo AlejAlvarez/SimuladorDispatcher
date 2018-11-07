@@ -68,25 +68,29 @@ public class SJF extends EstrategiaPriorizada {
                 else{
                     pEjecutando.decrementarTRafagaR();
                     //System.out.println("RAFAGAS RESTANTES DE " + pEjecutando.getNombre() + " = " + pEjecutando.getTRafagaR());
-                    cpuProcesos++;
                 }
             }
-            if((pEjecutando == null) && (!(pListos.isEmpty()))){
-                Proceso p = pListos.first();
-                System.out.println("Proceso " + p.getNombre() + " procede a ser ejecutado");
-                if(ultimoProcE.isEmpty() || p.getNombre() == ultimoProcE){
-                    this.ejecutarProcesoAnterior();
-                    System.out.println("No se produce cambio de contexto");
+            if(pEjecutando == null){
+                if(!pListos.isEmpty()){
+                    Proceso p = pListos.first();
+                    System.out.println("Proceso " + p.getNombre() + " procede a ser ejecutado");
+                    if(ultimoProcE.isEmpty() || p.getNombre() == ultimoProcE){
+                        this.ejecutarProcesoAnterior();
+                        System.out.println("No se produce cambio de contexto");
+                    }
+                    else{
+                        this.ejecutarProceso();
+                        System.out.println("Se produce cambio de contexto");
+                    }
+                    pEjecutando.decrementarTRafagaR();  //SE CARGA A EJECUTAR Y EJECUTA UNA UNIDAD DE TIEMPO DE LA RAFAGA
+                    this.incrementarTListoProcesos();
                 }
                 else{
-                    this.ejecutarProceso();
-                    System.out.println("Se produce cambio de contexto");
+                    this.cpuDesocupada++;
                 }
-                pEjecutando.decrementarTRafagaR();  //SE CARGA A EJECUTAR Y EJECUTA UNA UNIDAD DE TIEMPO DE LA RAFAGA
-                this.incrementarTListoProcesos();
             }
-            else{
-                this.cpuDesocupada++;
+            else if(!pListos.isEmpty()){
+                this.incrementarTListoProcesos();
             }
             contador++;
         }
@@ -94,7 +98,7 @@ public class SJF extends EstrategiaPriorizada {
         this.imprimirResultados();
     }
 
-    @Override
+    /*@Override
     public void imprimirResultados() {
         System.out.println("");
         System.out.println("");
@@ -104,8 +108,10 @@ public class SJF extends EstrategiaPriorizada {
         System.out.println("");
         for (int i = 0; i < pFinalizados.size(); i++){
             Proceso p = pFinalizados.get(i);
+            System.out.println("PROCESO: " + p.getNombre());
             System.out.println("Tiempo de Retorno de " + p.getNombre() +": " + p.getTRetorno());
             System.out.println("Tiempo de Retorno Normalizado de " + p.getNombre() +": " + p.calcularTRetornoNorm());
+            System.out.println("Hora de Finalización de " + p.getNombre() +": " + p.getHFinal());
             System.out.println("Tiempo en Estado de Listo de " + p.getNombre() +": " + p.getTListo());
             System.out.println("-----------------------------------");
         }
@@ -121,11 +127,12 @@ public class SJF extends EstrategiaPriorizada {
         System.out.println("");
         System.out.println("Tiempo de CPU desocupada: " + cpuDesocupada);
         System.out.println("Tiempo de CPU usada por SO: " + cpuSO);
-        System.out.println("Tiempo de CPU usada por los procesos: " + cpuProcesos);
-        //System.out.println("Porcentaje de uso de los procesos de CPU: " + this.calcularPorcentajeUsoCPU() + "%");
+        System.out.println("Tiempo de CPU usada por los procesos: " + this.calcularCpuProcesos());
+        System.out.println("Ultimo TFP: " + this.ultimoTfp);
+        System.out.println("Porcentaje de uso de los procesos de CPU: " + this.calcularPorcentajeUsoCPU() + "%");
         System.out.println("");
         System.out.println("");
         System.out.println("FIN.");
     }
-    
+    */
 }

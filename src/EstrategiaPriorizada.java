@@ -65,4 +65,14 @@ public abstract class EstrategiaPriorizada extends Estrategia {
         }
     }
     
+    @Override
+    protected int calcularCpuProcesos(){
+        Iterator<Proceso> iterator = pFinalizados.iterator();
+        while(iterator.hasNext()){
+            Proceso p = iterator.next();
+            cpuProcesos += p.getDuracionRafaga() * p.getRafagasTotales();
+        }
+        return cpuProcesos;
+    }
+    
 }

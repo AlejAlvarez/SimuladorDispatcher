@@ -111,6 +111,14 @@ public class Proceso {
     public void nuevaRafaga(int tcp){
         tRafagaR = duracionRafaga + tcp;
     }
+    
+    public void sumarTcp(int tcp){
+        tRafagaR += tcp;
+    }
+    
+    public void restarTcp(int tcp){
+        tRafagaR -= tcp;
+    }
 
     public int getHDesbloq() {
         return hDesbloq;
@@ -126,6 +134,10 @@ public class Proceso {
     
     public int getDuracionRafaga(){
         return duracionRafaga;
+    }
+    
+    public int getRafagasTotales(){
+        return this.rafagasTotales;
     }
 
     

@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
+        <file>
+            <url>src/FCFS.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>22</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/SJF.java</file>
-            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/Prioridad.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/EstrategiaPriorizada.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/Proceso.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/FCFS.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TIncorporacionComparator.java</file>
-            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/HDesbloqueoComparator.java</file>
-            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/MainTest.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/Estrategia.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/SRT.java</file>
-            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TRestanteComparator.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/RR.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/SJF.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/RafagaCpuComparator.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/Prioridad.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/HDesbloqueoComparator.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TIncorporacionYCpuComparator.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/MainTest.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TRestanteComparator.java</file>
         </group>
     </open-files>
 </project-private>

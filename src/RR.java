@@ -11,7 +11,8 @@ import java.io.File;
  *
  * @author alejandro
  */
-public class RR extends Estrategia { //Round-Robin
+    //Round-Robin
+public class RR extends Estrategia {
 
     @Override
     public void ejecutar(File f) {

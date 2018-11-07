@@ -37,9 +37,7 @@ public class FCFS extends Estrategia {
         contador = 0;
         this.leerArchivo(f);
         while (!((pNuevos.isEmpty())&&(pListos.isEmpty())&&(pBloqueados.isEmpty())&&(pEjecutando==null))){
-            
             System.out.println("Unidad de tiempo actual: " + contador);
-            
             if(!pNuevos.isEmpty()){
                 while((!pNuevos.isEmpty()) && (contador >= pNuevos.peek().getTIncorp())){  //ESTO ESTA CORRECTO.
                     Proceso p = pNuevos.peek();
@@ -47,7 +45,6 @@ public class FCFS extends Estrategia {
                     this.enlistarProcesoNuevo();
                 }
             }
-            
             if(!pBloqueados.isEmpty()){
                 while((!pBloqueados.isEmpty()) && (contador >= pBloqueados.peek().getHDesbloq())){
                     Proceso p = pBloqueados.peek();
@@ -55,7 +52,6 @@ public class FCFS extends Estrategia {
                     this.enlistarProceso();
                 }
             }
-            
             if((pEjecutando!=null)){
                 if(pEjecutando.getTRafagaR()==0){
                     if(pEjecutando.getRafagasRestantes()==0){
@@ -73,30 +69,31 @@ public class FCFS extends Estrategia {
                 else{
                     pEjecutando.decrementarTRafagaR();
                     //System.out.println("RAFAGAS RESTANTES DE " + pEjecutando.getNombre() + " = " + pEjecutando.getTRafagaR());
-                    cpuProcesos++;
                 }
             }
-            
-            if((pEjecutando == null) && (!(pListos.isEmpty()))){
-                Proceso p = pListos.peek();
-                System.out.println("Proceso " + p.getNombre() + " procede a ser ejecutado");
-                if(ultimoProcE.isEmpty() || p.getNombre() == ultimoProcE){
-                    this.ejecutarProcesoAnterior();
-                    System.out.println("No se produce cambio de contexto");
+            if(pEjecutando == null){
+                if(!pListos.isEmpty()){
+                    Proceso p = pListos.peek();
+                    System.out.println("Proceso " + p.getNombre() + " procede a ser ejecutado");
+                    if(ultimoProcE.isEmpty() || p.getNombre() == ultimoProcE){
+                        this.ejecutarProcesoAnterior();
+                        System.out.println("No se produce cambio de contexto");
+                    }
+                    else{
+                        this.ejecutarProceso();
+                        System.out.println("Se produce cambio de contexto");
+                    }
+                    pEjecutando.decrementarTRafagaR();  //SE CARGA A EJECUTAR Y EJECUTA UNA UNIDAD DE TIEMPO DE LA RAFAGA
+                    this.incrementarTListoProcesos();
                 }
                 else{
-                    this.ejecutarProceso();
-                    System.out.println("Se produce cambio de contexto");
+                    this.cpuDesocupada++;
                 }
-                pEjecutando.decrementarTRafagaR();  //SE CARGA A EJECUTAR Y EJECUTA UNA UNIDAD DE TIEMPO DE LA RAFAGA
+            }
+            else if(!pListos.isEmpty()){
                 this.incrementarTListoProcesos();
             }
-            else{
-                this.cpuDesocupada++;
-            }
-            
             contador++;
-            
         }
         Collections.sort(pFinalizados, tIncorpComp);
         this.imprimirResultados();
@@ -112,8 +109,10 @@ public class FCFS extends Estrategia {
         System.out.println("");
         for (int i = 0; i < pFinalizados.size(); i++){
             Proceso p = pFinalizados.get(i);
+            System.out.println("PROCESO: " + p.getNombre());
             System.out.println("Tiempo de Retorno de " + p.getNombre() +": " + p.getTRetorno());
             System.out.println("Tiempo de Retorno Normalizado de " + p.getNombre() +": " + p.calcularTRetornoNorm());
+            System.out.println("Hora de Finalización de " + p.getNombre() +": " + p.getHFinal());
             System.out.println("Tiempo en Estado de Listo de " + p.getNombre() +": " + p.getTListo());
             System.out.println("-----------------------------------");
         }
@@ -129,7 +128,7 @@ public class FCFS extends Estrategia {
         System.out.println("");
         System.out.println("Tiempo de CPU desocupada: " + cpuDesocupada);
         System.out.println("Tiempo de CPU usada por SO: " + cpuSO);
-        System.out.println("Tiempo de CPU usada por los procesos: " + cpuProcesos);
+        System.out.println("Tiempo de CPU usada por los procesos: " + this.calcularCpuProcesos());
         System.out.println("Porcentaje de uso de los procesos de CPU: " + this.calcularPorcentajeUsoCPU() + "%");
         System.out.println("");
         System.out.println("");

@@ -1,5 +1,7 @@
 
 import java.io.File;
+import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +13,22 @@ import java.io.File;
  *
  * @author alejandro
  */
-public class SRT extends EstrategiaPriorizada { //Shortest Remaining Time
+    //Shortest Remaining Time
+public class SRT extends EstrategiaPriorizadaPreemptiva {
+
+    public SRT(int tip, int tcp, int tfp) {
+        super(tip, tcp, tfp);
+        pBloqueados = new PriorityQueue(10, new HDesbloqueoComparator());
+        pNuevos = new PriorityQueue(10, new TIncorporacionYCpuComparator());
+        pListos = new TreeSet(new TRestanteComparator());
+    }
+
+    public SRT() {
+        super();
+        pBloqueados = new PriorityQueue(10, new HDesbloqueoComparator());
+        pNuevos = new PriorityQueue(10, new TIncorporacionYCpuComparator());
+        pListos = new TreeSet(new TRestanteComparator());
+    }
 
     @Override
     public void ejecutar(File f) {

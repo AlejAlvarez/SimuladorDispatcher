@@ -1,0 +1,60 @@
+Algoritmo SRT en pseudocodigo:
+
+ejecutar{
+    contador -> 0
+    leerArchivo(archivo)
+    mientras(not(pNuevos = vacio ^ pListos = vacio ^ pBloqueados = vacio ^ pEjecutando = null)){
+        si(pNuevos <> vacio){
+            mientras(pNuevos <> vacio ^ contador >= pNuevos.primero){
+                Proceso p -> pNuevos.primero
+                si(comprobarPEjecutando(p)){
+                    si(pEjectuando <> null){
+                        enlistar pEjecutando
+                    }
+                    ejecutar p 
+                }
+                sino{
+                    enlistar primer proceso de pNuevos
+                }
+            }
+        }
+        si(pBloqueados <> vacio){
+            mientras(pBloqueados <> vacio ^ contador >= pBloqueados.primero){
+                Proceso p -> pBloqueados.primero
+                si(comprobarPEjecutando(p)){
+                    si(pEjectuando <> null){
+                        enlistar pEjecutando
+                    }
+                    ejecutar p 
+                }
+                sino{
+                    enlistar primer proceso de pBloqueados
+                }
+            }
+        }
+        si(pEjecutando <> null){
+            si(tiempo restante de rafaga actual de pEjecutando = 0){
+                si(pEjecutando no tiene mas rafagas restantes){
+                    finalizar pEjecutando
+                }
+                sino{
+                    bloquear pEjecutando
+                }
+            }
+            sino{
+                decrementar tiempo restante de rafaga actual de pEjecutando
+            }
+        }
+        si(pEjecutando = null){
+            si (pListos <> vacio){
+                ejecutar primer proceso de pListos
+            }
+            sino{
+                aumentar tiempo de cpu desocupada
+            }
+        }
+        sino si(pListos <> vacio){
+            aumentar tiempo en estado de listo de todos los procesos listos
+        }
+    }
+}
