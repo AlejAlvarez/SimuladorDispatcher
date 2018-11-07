@@ -1,5 +1,5 @@
 
-import java.io.File;
+import java.util.Comparator;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,12 +11,11 @@ import java.io.File;
  *
  * @author Alejandro
  */
-public class MainTest {
-    
-    public static void main (String[] args){
-        Estrategia estrategia = new SJF(0, 0, 0);
-        File f = new File("tanda4.txt");
-        estrategia.ejecutar(f);
+public class TRestanteComparator implements Comparator<Proceso> {
+
+    @Override
+    public int compare(Proceso o1, Proceso o2) {
+        return o1.getTRafagaR() - o2.getTRafagaR();
     }
     
 }

@@ -51,6 +51,7 @@ public abstract class Estrategia {
         cantProcesos = 0;
         pFinalizados = new LinkedList<Proceso>();
         pListos = new LinkedList<Proceso>();
+        pEjecutando = null;
     }
     
     public Estrategia(){
@@ -65,6 +66,7 @@ public abstract class Estrategia {
         cantProcesos = 0;
         pFinalizados = new LinkedList<Proceso>();
         pListos = new LinkedList<Proceso>();
+        pEjecutando = null;
     }
     
     protected void leerArchivo(File f){
@@ -96,10 +98,6 @@ public abstract class Estrategia {
             e.printStackTrace();
             System.err.println("Error en la Entrada/Salida!");
         }
-    }
-    
-    protected void enlistarProceso(Proceso p){
-        pListos.add(p);
     }
     
     protected void enlistarProceso(){

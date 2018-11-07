@@ -11,7 +11,7 @@ import java.io.File;
  *
  * @author alejandro
  */
-public class SRT extends Estrategia { //Shortest Remaining Time
+public class SRT extends EstrategiaPriorizada { //Shortest Remaining Time
 
     @Override
     public void ejecutar(File f) {

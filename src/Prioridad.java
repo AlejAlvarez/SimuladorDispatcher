@@ -11,7 +11,7 @@ import java.io.File;
  *
  * @author alejandro
  */
-public class Prioridad extends Estrategia {
+public class Prioridad extends EstrategiaPriorizada {
 
     @Override
     public void ejecutar(File f) {

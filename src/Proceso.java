@@ -123,6 +123,10 @@ public class Proceso {
     public void sumarTListoTfp(int tfp){
         tListo += tfp;
     }
+    
+    public int getDuracionRafaga(){
+        return duracionRafaga;
+    }
 
     
     
