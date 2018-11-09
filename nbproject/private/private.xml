@@ -18,14 +18,18 @@
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TIncorporacionComparator.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/Estrategia.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/SRT.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/PrioridadComparator.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/RR.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/SJF.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/RafagaCpuComparator.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/EstrategiaPriorizadaPreemptiva.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/Prioridad.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/HDesbloqueoComparator.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TIncorporacionYCpuComparator.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/MainTest.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/EstrategiaPreemptiva.java</file>
             <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TRestanteComparator.java</file>
+            <file>file:/D:/GitKraken%20Repositories/SimuladorDispatcher/src/TIncorpYPrioComparator.java</file>
         </group>
     </open-files>
 </project-private>

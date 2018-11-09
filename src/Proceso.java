@@ -38,6 +38,10 @@ public class Proceso {
         tServicio = rafagasTotales * duracionRafaga;
     }
 
+    public int getPrioridad() {
+        return prioridad;
+    }
+    
     public int getTIncorp() {
         return tIncorp;
     }
@@ -76,7 +80,7 @@ public class Proceso {
 
     public void setTRetorno(int tRetorno) {
         hFinal = tRetorno;
-        this.tRetorno = tRetorno - tIncorp;
+        this.tRetorno = tRetorno - tArribo;
     }
     
     public double calcularTRetornoNorm() {
@@ -138,6 +142,10 @@ public class Proceso {
     
     public int getRafagasTotales(){
         return this.rafagasTotales;
+    }
+
+    void aumentarRafagasRestantes() {
+        this.rafagasRestantes++;
     }
 
     
