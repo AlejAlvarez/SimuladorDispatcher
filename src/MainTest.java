@@ -14,8 +14,8 @@ import java.io.File;
 public class MainTest {
     
     public static void main (String[] args){
-        Estrategia estrategia = new Prioridad(1,0,2);
-        File f = new File("tanda2.txt");
+        Estrategia estrategia = new RR(1,1,1,3);
+        File f = new File("tanda1.txt");
         estrategia.ejecutar(f);
     }
     

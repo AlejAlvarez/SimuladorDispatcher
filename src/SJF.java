@@ -21,13 +21,13 @@ public class SJF extends EstrategiaPriorizada {
         super(tip, tcp, tfp);
         pBloqueados = new PriorityQueue(10, new HDesbloqueoComparator());
         pNuevos = new PriorityQueue(10, new TIncorporacionYCpuComparator());
-        pListos = new TreeSet(new RafagaCpuComparator());
+        pListos = new PriorityQueue(10, new RafagaCpuComparator());
     }
 
     public SJF() {
         pBloqueados = new PriorityQueue(10, new HDesbloqueoComparator());
         pNuevos = new PriorityQueue(10, new TIncorporacionYCpuComparator());
-        pListos = new TreeSet(new RafagaCpuComparator());
+        pListos = new PriorityQueue(10, new RafagaCpuComparator());
     }
       
     
@@ -72,7 +72,7 @@ public class SJF extends EstrategiaPriorizada {
             }
             if(pEjecutando == null){
                 if(!pListos.isEmpty()){
-                    Proceso p = pListos.first();
+                    Proceso p = pListos.peek();
                     System.out.println("Proceso " + p.getNombre() + " procede a ser ejecutado");
                     if(ultimoProcE.isEmpty() || p.getNombre() == ultimoProcE){
                         this.ejecutarProcesoAnterior();

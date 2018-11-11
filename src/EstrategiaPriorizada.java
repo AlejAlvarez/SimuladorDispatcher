@@ -1,5 +1,6 @@
 
 import java.util.Iterator;
+import java.util.PriorityQueue;
 import java.util.TreeSet;
 
 /*
@@ -14,7 +15,7 @@ import java.util.TreeSet;
  */
 public abstract class EstrategiaPriorizada extends Estrategia {
     
-    protected static TreeSet<Proceso> pListos;
+    protected static PriorityQueue<Proceso> pListos;
 
     public EstrategiaPriorizada(int tip, int tcp, int tfp) {
         super(tip, tcp, tfp);
@@ -41,7 +42,7 @@ public abstract class EstrategiaPriorizada extends Estrategia {
     
     @Override
     protected void ejecutarProcesoAnterior(){
-        pEjecutando = pListos.pollFirst();
+        pEjecutando = pListos.poll();
         ultimoProcE = pEjecutando.getNombre();
         pEjecutando.nuevaRafaga();
         pEjecutando.disminuirRafagasRestantes();       
@@ -50,7 +51,7 @@ public abstract class EstrategiaPriorizada extends Estrategia {
     @Override
     protected void ejecutarProceso(){
         cpuSO += tcp;
-        pEjecutando = pListos.pollFirst();
+        pEjecutando = pListos.poll();
         ultimoProcE = pEjecutando.getNombre();
         pEjecutando.nuevaRafaga(tcp);
         pEjecutando.disminuirRafagasRestantes();

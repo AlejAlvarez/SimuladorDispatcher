@@ -22,14 +22,14 @@ public class SRT extends EstrategiaPriorizadaPreemptiva {
         super(tip, tcp, tfp);
         pBloqueados = new PriorityQueue(10, new HDesbloqueoComparator());
         pNuevos = new PriorityQueue(10, new TIncorporacionYCpuComparator());
-        pListos = new TreeSet(new TRestanteComparator());
+        pListos = new PriorityQueue(10, new TRestanteComparator());
     }
 
     public SRT() {
         super();
         pBloqueados = new PriorityQueue(10, new HDesbloqueoComparator());
         pNuevos = new PriorityQueue(10, new TIncorporacionYCpuComparator());
-        pListos = new TreeSet(new TRestanteComparator());
+        pListos = new PriorityQueue(10, new TRestanteComparator());
     }
 
     @Override
@@ -126,7 +126,7 @@ public class SRT extends EstrategiaPriorizadaPreemptiva {
             }
             if(pEjecutando == null){
                 if(!pListos.isEmpty()){
-                    Proceso p = pListos.first();
+                    Proceso p = pListos.peek();
                     System.out.println("Proceso " + p.getNombre() + " procede a ser ejecutado");
                     if(ultimoProcE.isEmpty() || p.getNombre() == ultimoProcE){
                         this.ejecutarProcesoAnterior();

@@ -94,7 +94,7 @@ public abstract class EstrategiaPriorizadaPreemptiva extends EstrategiaPriorizad
     @Override
     protected void ejecutarProceso(){
         cpuSO += tcp;
-        pEjecutando = pListos.pollFirst();
+        pEjecutando = pListos.poll();
         ultimoProcE = pEjecutando.getNombre();
         pEjecutando.sumarTcp(tcp);
         pEjecutando.disminuirRafagasRestantes();
@@ -110,7 +110,7 @@ public abstract class EstrategiaPriorizadaPreemptiva extends EstrategiaPriorizad
     
     @Override
     protected void ejecutarProcesoAnterior(){
-        pEjecutando = pListos.pollFirst();
+        pEjecutando = pListos.poll();
         ultimoProcE = pEjecutando.getNombre();
         pEjecutando.disminuirRafagasRestantes();
     }
@@ -134,6 +134,19 @@ public abstract class EstrategiaPriorizadaPreemptiva extends EstrategiaPriorizad
             return true;
         }
         return false;
+    }
+    
+    protected void sumarTcp(int tcp){
+        if(pEjecutando != null){
+            cpuSO += tcp;
+            pEjecutando.sumarTcp(tcp);
+        }
+    }
+    
+    protected void ejecutarProcesoSinTcp(Proceso p){
+        pEjecutando = pListos.poll();
+        ultimoProcE = pEjecutando.getNombre();
+        pEjecutando.disminuirRafagasRestantes();        
     }
     
     
