@@ -56,6 +56,7 @@ public class RR extends EstrategiaPreemptiva {
                 }
             }
             if((pEjecutando!=null)){
+                //System.out.println("Tiempo de rafaga restante de " + pEjecutando.getNombre() + ": " + pEjecutando.getTRafagaR());
                 if(pEjecutando.getTRafagaR()==0){
                     if(pEjecutando.getRafagasRestantes()==0){
                         System.out.println("Proceso " + pEjecutando.getNombre() + " terminó todas sus ráfagas");
@@ -72,7 +73,7 @@ public class RR extends EstrategiaPreemptiva {
                     }
                 }
                 else if(contadorQ == quantum){
-                    System.out.println("Proceso " + pEjecutando.getNombre() + " completo el tiempo de quantum y es enlistado");
+                    System.out.println("Proceso " + pEjecutando.getNombre() + " completo su tiempo de quantum y es enlistado");
                     this.enlistarProcesoEjecutando();
                     contadorQ = 0;
                 }
@@ -93,7 +94,7 @@ public class RR extends EstrategiaPreemptiva {
                     else{
                         this.ejecutarProceso();
                         System.out.println("Se produce cambio de contexto");
-                        contadorQ -= tcp;
+                        contadorQ = contadorQ - tcp;
                     }
                     pEjecutando.decrementarTRafagaR();  //SE CARGA A EJECUTAR Y EJECUTA UNA UNIDAD DE TIEMPO DE LA RAFAGA
                     contadorQ++;

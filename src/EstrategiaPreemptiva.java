@@ -22,14 +22,14 @@ public abstract class EstrategiaPreemptiva extends Estrategia {
     @Override
     protected void enlistarProcesoNuevo(){
         Proceso p = pNuevos.poll();
-        p.nuevaRafaga(tcp);
+        p.nuevaRafaga();
         pListos.add(p);
     }
     
     @Override
     protected void enlistarProceso(){
         Proceso p = pBloqueados.poll();
-        p.nuevaRafaga(tcp);
+        p.nuevaRafaga();
         pListos.add(p);
     }
     
@@ -43,7 +43,6 @@ public abstract class EstrategiaPreemptiva extends Estrategia {
     protected void ejecutarProcesoAnterior(){
         pEjecutando = pListos.poll();
         ultimoProcE = pEjecutando.getNombre();
-        pEjecutando.restarTcp(tcp);
         pEjecutando.disminuirRafagasRestantes();        
     }
     

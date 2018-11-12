@@ -39,79 +39,17 @@ public class Prioridad extends EstrategiaPriorizadaPreemptiva {
         while (!((pNuevos.isEmpty())&&(pListos.isEmpty())&&(pBloqueados.isEmpty())&&(pEjecutando==null))){
             System.out.println("Unidad de tiempo actual: " + contador);
             if(!pNuevos.isEmpty()){
-                while((!pNuevos.isEmpty()) && (contador >= pNuevos.peek().getTIncorp())){  //ESTO ESTA CORRECTO.
+                while((!pNuevos.isEmpty()) && (contador >= pNuevos.peek().getTIncorp())){
                     Proceso p = pNuevos.peek();
-                    if(this.comprobarPrioPEjecutando(p)){
-                        System.out.println("Proceso " + p.getNombre() + " cumplió su TIP y procede a ser ejecutado");
-                        if(pEjecutando!=null){
-                            if(pEjecutando.getTRafagaR()==0){
-                                if(pEjecutando.getRafagasRestantes()==0){
-                                    System.out.println("Proceso " + pEjecutando.getNombre() + " terminó todas sus ráfagas");
-                                    this.finalizarProceso();
-                                    if(pNuevos.isEmpty() && pListos.isEmpty() && pBloqueados.isEmpty()){
-                                        this.ultimoTfp = contador + tfp;
-                                    }
-                                }
-                                else{
-                                    System.out.println("Proceso " + pEjecutando.getNombre() + " fue bloqueado durante " + pEjecutando.getDuracionES() + " unidades de tiempo.");
-                                    this.bloquearProceso();
-                                }
-                            }
-                            else{
-                                System.out.println("Proceso " + pEjecutando.getNombre() + " deja de ser ejecutado y es enlistado");
-                                System.out.println("Se produce cambio de contexto");                                
-                                this.enlistarProcesoEjecutando();                                
-                            }
-                        }
-                        if(ultimoProcE.isEmpty()){
-                            this.ejecutarPrimerProceso(p);
-                        }
-                        else{
-                            this.ejecutarProceso(p);                            
-                        }
-                        pNuevos.remove(p);
-                    }
-                    else{
-                        System.out.println("Proceso " + p.getNombre() + " cumplió su TIP y fue enlistado");
-                        this.enlistarProcesoNuevo();                        
-                    }
-                    //this.sumarTcp(tcp);
+                    System.out.println("Proceso " + p.getNombre() + " cumplió su TIP y fue enlistado");
+                    this.enlistarProcesoNuevo();
                 }
             }
             if(!pBloqueados.isEmpty()){
                 while((!pBloqueados.isEmpty()) && (contador >= pBloqueados.peek().getHDesbloq())){
                     Proceso p = pBloqueados.peek();
-                    if(this.comprobarPrioPEjecutando(p)){
-                        System.out.println("Proceso " + p.getNombre() + " terminó su ES y procede a ser ejecutado");
-                        if(pEjecutando!=null){
-                            if(pEjecutando.getTRafagaR()==0){
-                                if(pEjecutando.getRafagasRestantes()==0){
-                                    System.out.println("Proceso " + pEjecutando.getNombre() + " terminó todas sus ráfagas");
-                                    this.finalizarProceso();
-                                    if(pNuevos.isEmpty() && pListos.isEmpty() && pBloqueados.isEmpty()){
-                                        this.ultimoTfp = contador + tfp;
-                                    }
-                                }
-                                else{
-                                    System.out.println("Proceso " + pEjecutando.getNombre() + " fue bloqueado durante " + pEjecutando.getDuracionES() + " unidades de tiempo.");
-                                    this.bloquearProceso();
-                                }
-                            }
-                            else{
-                                System.out.println("Proceso " + pEjecutando.getNombre() + " deja de ser ejecutado y es enlistado");
-                                System.out.println("Se produce cambio de contexto");
-                                this.enlistarProcesoEjecutando();                                
-                            }
-                        }
-                        this.ejecutarProceso(p);
-                        pBloqueados.remove(p);
-                    }
-                    else{
-                        System.out.println("Proceso " + p.getNombre() + " terminó su ES y fue enlistado");
-                        System.out.println("Rafagas restantes de " + p.getNombre() +": " + p.getRafagasRestantes());
-                        this.enlistarProceso(p);
-                    }
-                    //this.sumarTcp(tcp);
+                    System.out.println("Proceso " + p.getNombre() + " terminó su ES y fue enlistado");
+                    this.enlistarProceso(p);
                 }
             }
             if((pEjecutando!=null)){
@@ -128,9 +66,21 @@ public class Prioridad extends EstrategiaPriorizadaPreemptiva {
                         this.bloquearProceso();
                     }
                 }
+                else if(!pListos.isEmpty()){
+                    if(this.comprobarPrioPEjecutando(pListos.peek())){
+                        System.out.println("Proceso " + pEjecutando.getNombre() + " deja de ejecutarse y es enlistado");
+                        System.out.println("Proceso " + pListos.peek().getNombre() + " posee mas prioridad y procede a ser ejecutado");
+                        System.out.println("Se produce cambio de contexto");
+                        this.enlistarProcesoEjecutando();
+                        this.ejecutarProceso();
+                        pEjecutando.decrementarTRafagaR();                        
+                    }
+                    else{
+                        pEjecutando.decrementarTRafagaR();                        
+                    }
+                }
                 else{
-                    pEjecutando.decrementarTRafagaR();
-                    //System.out.println("RAFAGAS RESTANTES DE " + pEjecutando.getNombre() + " = " + pEjecutando.getTRafagaR());
+                    pEjecutando.decrementarTRafagaR();                    
                 }
             }
             if(pEjecutando == null){

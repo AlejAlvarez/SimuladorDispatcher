@@ -11,11 +11,14 @@ import java.io.File;
  *
  * @author Alejandro
  */
+
+
 public class MainTest {
     
     public static void main (String[] args){
-        Estrategia estrategia = new RR(1,1,1,3);
-        File f = new File("tanda1.txt");
+        /* Las estrategias implementadas son: FCFS, SJF (Es lo mismo que SPN), SRT, RR (Round Robin), Prioridad */
+        Estrategia estrategia = new FCFS(1,1,1); //TIP, TCP, TFP.
+        File f = new File("tanda1.txt");        //En caso de Round Robin, instanciar la clase de la forma: TIP, TCP, TFP, Quantum.
         estrategia.ejecutar(f);
     }
     
