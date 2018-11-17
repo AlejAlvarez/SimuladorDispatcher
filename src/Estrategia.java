@@ -1,8 +1,10 @@
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -37,6 +39,9 @@ public abstract class Estrategia {
     protected static LinkedList<Proceso> pFinalizados;
     protected static Proceso pEjecutando;
     protected static String ultimoProcE;
+    File archivo;
+    FileWriter fw;
+    BufferedWriter bw;
     
 
     public Estrategia(int tip, int tcp, int tfp) {
@@ -99,6 +104,32 @@ public abstract class Estrategia {
             e.printStackTrace();
             System.err.println("Error en la Entrada/Salida!");
         }
+    }
+    
+    protected void abrirArchivoEscritura(){
+        try{
+            archivo = new File ("resultados.txt");
+            fw = new FileWriter(archivo);
+            bw = new BufferedWriter(fw);
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void setTip(int tip) {
+        Estrategia.tip = tip;
+    }
+
+    public static void setTfp(int tfp) {
+        Estrategia.tfp = tfp;
+    }
+
+    public static void setTcp(int tcp) {
+        Estrategia.tcp = tcp;
     }
     
     protected void enlistarProceso(){
@@ -171,39 +202,106 @@ public abstract class Estrategia {
     public abstract void ejecutar(File f);
     
     public void imprimirResultados(){
-        System.out.println("");
-        System.out.println("");
-        System.out.println("-----------------------------------");
-        System.out.println("");
-        System.out.println("INFORMACIÓN DE PROCESOS INDIVIDUALES");
-        System.out.println("");
-        for (int i = 0; i < pFinalizados.size(); i++){
-            Proceso p = pFinalizados.get(i);
-            System.out.println("PROCESO: " + p.getNombre());
-            System.out.println("Tiempo de Retorno de " + p.getNombre() +": " + p.getTRetorno());
-            System.out.println("Tiempo de Retorno Normalizado de " + p.getNombre() +": " + p.calcularTRetornoNorm());
-            System.out.println("Hora de Finalización de " + p.getNombre() +": " + p.getHFinal());
-            System.out.println("Tiempo en Estado de Listo de " + p.getNombre() +": " + p.getTListo());
+        try{
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
             System.out.println("-----------------------------------");
+            bw.write("-----------------------------------");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("INFORMACIÓN DE PROCESOS INDIVIDUALES");
+            bw.write("INFORMACIÓN DE PROCESOS INDIVIDUALES");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            for (int i = 0; i < pFinalizados.size(); i++){
+                Proceso p = pFinalizados.get(i);
+                System.out.println("PROCESO: " + p.getNombre());
+                bw.write("PROCESO: " + p.getNombre());
+                bw.newLine();
+                System.out.println("Tiempo de Retorno de " + p.getNombre() +": " + p.getTRetorno());
+                bw.write("Tiempo de Retorno de " + p.getNombre() +": " + p.getTRetorno());
+                bw.newLine();
+                System.out.println("Tiempo de Retorno Normalizado de " + p.getNombre() +": " + p.calcularTRetornoNorm());
+                bw.write("Tiempo de Retorno Normalizado de " + p.getNombre() +": " + p.calcularTRetornoNorm());
+                bw.newLine();
+                System.out.println("Hora de Finalización de " + p.getNombre() +": " + p.getHFinal());
+                bw.write("Hora de Finalización de " + p.getNombre() +": " + p.getHFinal());
+                bw.newLine();
+                System.out.println("Tiempo en Estado de Listo de " + p.getNombre() +": " + p.getTListo());
+                bw.write("Tiempo en Estado de Listo de " + p.getNombre() +": " + p.getTListo());
+                bw.newLine();
+                System.out.println("-----------------------------------");
+                bw.write("-----------------------------------");
+                bw.newLine();
+            }
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("INFORMACIÓN TANDA DE PROCESOS");
+            bw.write("INFORMACIÓN TANDA DE PROCESOS");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("Tiempo de Retorno de la Tanda: " + ultimoTfp);
+            bw.write("Tiempo de Retorno de la Tanda: " + ultimoTfp);
+            bw.newLine();
+            System.out.println("Tiempo Medio de Retorno: " + this.calcularTMedioRetorno());
+            bw.write("Tiempo Medio de Retorno: " + this.calcularTMedioRetorno());
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("-----------------------------------");
+            bw.write("-----------------------------------");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("INFORMACIÓN USO DEL CPU");
+            bw.write("INFORMACIÓN USO DEL CPU");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("Tiempo de CPU desocupada: " + cpuDesocupada);
+            bw.write("Tiempo de CPU desocupada: " + cpuDesocupada);
+            bw.newLine();
+            System.out.println("Tiempo de CPU usada por SO: " + cpuSO);
+            bw.write("Tiempo de CPU usada por SO: " + cpuSO);
+            bw.newLine();
+            System.out.println("Tiempo de CPU usada por los procesos: " + this.calcularCpuProcesos());
+            bw.write("Tiempo de CPU usada por los procesos: " + this.calcularCpuProcesos());
+            bw.newLine();
+            System.out.println("Ultimo TFP: " + this.ultimoTfp);
+            bw.write("Ultimo TFP: " + this.ultimoTfp);
+            bw.newLine();
+            System.out.println("Porcentaje de uso de los procesos de CPU: " + this.calcularPorcentajeUsoCPU() + "%");
+            bw.write("Porcentaje de uso de los procesos de CPU: " + this.calcularPorcentajeUsoCPU() + "%");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("");
+            bw.write("");
+            bw.newLine();
+            System.out.println("FIN DE LA EJECUCIÓN.");            
+            bw.write("FIN DE LA EJECUCIÓN.");
         }
-        System.out.println("");
-        System.out.println("INFORMACIÓN TANDA DE PROCESOS");
-        System.out.println("");
-        System.out.println("Tiempo de Retorno de la Tanda: " + ultimoTfp);
-        System.out.println("Tiempo Medio de Retorno: " + this.calcularTMedioRetorno());
-        System.out.println("");
-        System.out.println("-----------------------------------");
-        System.out.println("");
-        System.out.println("INFORMACIÓN USO DEL CPU");
-        System.out.println("");
-        System.out.println("Tiempo de CPU desocupada: " + cpuDesocupada);
-        System.out.println("Tiempo de CPU usada por SO: " + cpuSO);
-        System.out.println("Tiempo de CPU usada por los procesos: " + this.calcularCpuProcesos());
-        System.out.println("Ultimo TFP: " + this.ultimoTfp);
-        System.out.println("Porcentaje de uso de los procesos de CPU: " + this.calcularPorcentajeUsoCPU() + "%");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("FIN.");
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
     
     

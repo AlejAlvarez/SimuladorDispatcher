@@ -1,0 +1,536 @@
+
+--------------------------------
+Unidad de tiempo actual: 0
+
+Estado de la lista de los procesos nuevos:
+      P2
+      P1
+      P3
+      P4
+      P5
+      P6
+Proceso P2 cumplió su TIP y fue enlistado
+Proceso P1 cumplió su TIP y fue enlistado
+Estado de la lista de los procesos listos:
+      P2
+      P1
+Proceso P2 procede a ser ejecutado
+No se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 1
+
+Estado de la lista de los procesos nuevos:
+      P3
+      P4
+      P5
+      P6
+Tiempo de rafaga restante de P2: 0
+
+--------------------------------
+Unidad de tiempo actual: 2
+
+Estado de la lista de los procesos nuevos:
+      P3
+      P4
+      P5
+      P6
+Proceso P3 cumplió su TIP y fue enlistado
+Proceso P2 fue bloqueado durante 3 unidades de tiempo.
+Estado de la lista de los procesos listos:
+      P3
+      P1
+Proceso P3 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 3
+
+Estado de la lista de los procesos nuevos:
+      P4
+      P6
+      P5
+Proceso P4 cumplió su TIP y fue enlistado
+Estado de la lista de los procesos bloqueados:
+      P2
+Tiempo de rafaga restante de P3: 1
+
+--------------------------------
+Unidad de tiempo actual: 4
+
+Estado de la lista de los procesos nuevos:
+      P5
+      P6
+Estado de la lista de los procesos bloqueados:
+      P2
+Tiempo de rafaga restante de P3: 0
+
+--------------------------------
+Unidad de tiempo actual: 5
+
+Estado de la lista de los procesos nuevos:
+      P5
+      P6
+Proceso P5 cumplió su TIP y fue enlistado
+Estado de la lista de los procesos bloqueados:
+      P2
+Proceso P2 terminó su ES y fue enlistado
+Proceso P3 fue bloqueado durante 8 unidades de tiempo.
+Estado de la lista de los procesos listos:
+      P5
+      P2
+      P4
+      P1
+Proceso P5 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 6
+
+Estado de la lista de los procesos nuevos:
+      P6
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P5: 4
+
+--------------------------------
+Unidad de tiempo actual: 7
+
+Estado de la lista de los procesos nuevos:
+      P6
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P5: 3
+
+--------------------------------
+Unidad de tiempo actual: 8
+
+Estado de la lista de los procesos nuevos:
+      P6
+Proceso P6 cumplió su TIP y fue enlistado
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P5: 2
+
+--------------------------------
+Unidad de tiempo actual: 9
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P5: 1
+
+--------------------------------
+Unidad de tiempo actual: 10
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P5: 0
+
+--------------------------------
+Unidad de tiempo actual: 11
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Proceso P5 fue bloqueado durante 2 unidades de tiempo.
+Estado de la lista de los procesos listos:
+      P6
+      P4
+      P1
+      P2
+Proceso P6 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 12
+
+Estado de la lista de los procesos bloqueados:
+      P3
+      P5
+Tiempo de rafaga restante de P6: 0
+
+--------------------------------
+Unidad de tiempo actual: 13
+
+Estado de la lista de los procesos bloqueados:
+      P3
+      P5
+Proceso P3 terminó su ES y fue enlistado
+Proceso P5 terminó su ES y fue enlistado
+Proceso P6 fue bloqueado durante 2 unidades de tiempo.
+Estado de la lista de los procesos listos:
+      P5
+      P3
+      P1
+      P2
+      P4
+Proceso P5 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 14
+
+Estado de la lista de los procesos bloqueados:
+      P6
+Tiempo de rafaga restante de P5: 4
+
+--------------------------------
+Unidad de tiempo actual: 15
+
+Estado de la lista de los procesos bloqueados:
+      P6
+Proceso P6 terminó su ES y fue enlistado
+Tiempo de rafaga restante de P5: 3
+
+--------------------------------
+Unidad de tiempo actual: 16
+
+Tiempo de rafaga restante de P5: 2
+
+--------------------------------
+Unidad de tiempo actual: 17
+
+Tiempo de rafaga restante de P5: 1
+
+--------------------------------
+Unidad de tiempo actual: 18
+
+Tiempo de rafaga restante de P5: 0
+
+--------------------------------
+Unidad de tiempo actual: 19
+
+Proceso P5 terminó todas sus ráfagas
+Estado de la lista de los procesos listos:
+      P3
+      P6
+      P1
+      P2
+      P4
+Proceso P3 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 20
+
+Tiempo de rafaga restante de P3: 1
+
+--------------------------------
+Unidad de tiempo actual: 21
+
+Tiempo de rafaga restante de P3: 0
+
+--------------------------------
+Unidad de tiempo actual: 22
+
+Proceso P3 fue bloqueado durante 8 unidades de tiempo.
+Estado de la lista de los procesos listos:
+      P6
+      P4
+      P1
+      P2
+Proceso P6 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 23
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P6: 0
+
+--------------------------------
+Unidad de tiempo actual: 24
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Proceso P6 fue bloqueado durante 2 unidades de tiempo.
+Estado de la lista de los procesos listos:
+      P4
+      P2
+      P1
+Proceso P4 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 25
+
+Estado de la lista de los procesos bloqueados:
+      P6
+      P3
+Tiempo de rafaga restante de P4: 7
+
+--------------------------------
+Unidad de tiempo actual: 26
+
+Estado de la lista de los procesos bloqueados:
+      P6
+      P3
+Proceso P6 terminó su ES y fue enlistado
+Estado de la lista de los procesos listos:
+      P6
+      P1
+      P2
+Proceso P4 deja de ejecutarse y es enlistado
+Proceso P6 posee mas prioridad y procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 27
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P6: 0
+
+--------------------------------
+Unidad de tiempo actual: 28
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Proceso P6 terminó todas sus ráfagas
+Estado de la lista de los procesos listos:
+      P4
+      P1
+      P2
+Proceso P4 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 29
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Tiempo de rafaga restante de P4: 6
+
+--------------------------------
+Unidad de tiempo actual: 30
+
+Estado de la lista de los procesos bloqueados:
+      P3
+Proceso P3 terminó su ES y fue enlistado
+Estado de la lista de los procesos listos:
+      P3
+      P1
+      P2
+Proceso P4 deja de ejecutarse y es enlistado
+Proceso P3 posee mas prioridad y procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 31
+
+Tiempo de rafaga restante de P3: 1
+
+--------------------------------
+Unidad de tiempo actual: 32
+
+Tiempo de rafaga restante de P3: 0
+
+--------------------------------
+Unidad de tiempo actual: 33
+
+Proceso P3 terminó todas sus ráfagas
+Estado de la lista de los procesos listos:
+      P4
+      P1
+      P2
+Proceso P4 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 34
+
+Tiempo de rafaga restante de P4: 5
+
+--------------------------------
+Unidad de tiempo actual: 35
+
+Tiempo de rafaga restante de P4: 4
+
+--------------------------------
+Unidad de tiempo actual: 36
+
+Tiempo de rafaga restante de P4: 3
+
+--------------------------------
+Unidad de tiempo actual: 37
+
+Tiempo de rafaga restante de P4: 2
+
+--------------------------------
+Unidad de tiempo actual: 38
+
+Tiempo de rafaga restante de P4: 1
+
+--------------------------------
+Unidad de tiempo actual: 39
+
+Tiempo de rafaga restante de P4: 0
+
+--------------------------------
+Unidad de tiempo actual: 40
+
+Proceso P4 terminó todas sus ráfagas
+Estado de la lista de los procesos listos:
+      P2
+      P1
+Proceso P2 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 41
+
+Tiempo de rafaga restante de P2: 1
+
+--------------------------------
+Unidad de tiempo actual: 42
+
+Tiempo de rafaga restante de P2: 0
+
+--------------------------------
+Unidad de tiempo actual: 43
+
+Proceso P2 terminó todas sus ráfagas
+Estado de la lista de los procesos listos:
+      P1
+Proceso P1 procede a ser ejecutado
+Se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 44
+
+Tiempo de rafaga restante de P1: 3
+
+--------------------------------
+Unidad de tiempo actual: 45
+
+Tiempo de rafaga restante de P1: 2
+
+--------------------------------
+Unidad de tiempo actual: 46
+
+Tiempo de rafaga restante de P1: 1
+
+--------------------------------
+Unidad de tiempo actual: 47
+
+Tiempo de rafaga restante de P1: 0
+
+--------------------------------
+Unidad de tiempo actual: 48
+
+Proceso P1 fue bloqueado durante 5 unidades de tiempo.
+
+--------------------------------
+Unidad de tiempo actual: 49
+
+Estado de la lista de los procesos bloqueados:
+      P1
+
+--------------------------------
+Unidad de tiempo actual: 50
+
+Estado de la lista de los procesos bloqueados:
+      P1
+
+--------------------------------
+Unidad de tiempo actual: 51
+
+Estado de la lista de los procesos bloqueados:
+      P1
+
+--------------------------------
+Unidad de tiempo actual: 52
+
+Estado de la lista de los procesos bloqueados:
+      P1
+
+--------------------------------
+Unidad de tiempo actual: 53
+
+Estado de la lista de los procesos bloqueados:
+      P1
+Proceso P1 terminó su ES y fue enlistado
+Estado de la lista de los procesos listos:
+      P1
+Proceso P1 procede a ser ejecutado
+No se produce cambio de contexto
+
+--------------------------------
+Unidad de tiempo actual: 54
+
+Tiempo de rafaga restante de P1: 2
+
+--------------------------------
+Unidad de tiempo actual: 55
+
+Tiempo de rafaga restante de P1: 1
+
+--------------------------------
+Unidad de tiempo actual: 56
+
+Tiempo de rafaga restante de P1: 0
+
+--------------------------------
+Unidad de tiempo actual: 57
+
+Proceso P1 terminó todas sus ráfagas
+
+
+-----------------------------------
+
+INFORMACIÓN DE PROCESOS INDIVIDUALES
+
+PROCESO: P2
+Tiempo de Retorno de P2: 44
+Tiempo de Retorno Normalizado de P2: 11.0
+Hora de Finalización de P2: 44
+Tiempo en Estado de Listo de P2: 36
+-----------------------------------
+PROCESO: P1
+Tiempo de Retorno de P1: 58
+Tiempo de Retorno Normalizado de P1: 7.0
+Hora de Finalización de P1: 58
+Tiempo en Estado de Listo de P1: 44
+-----------------------------------
+PROCESO: P3
+Tiempo de Retorno de P3: 32
+Tiempo de Retorno Normalizado de P3: 5.0
+Hora de Finalización de P3: 34
+Tiempo en Estado de Listo de P3: 7
+-----------------------------------
+PROCESO: P4
+Tiempo de Retorno de P4: 38
+Tiempo de Retorno Normalizado de P4: 4.0
+Hora de Finalización de P4: 41
+Tiempo en Estado de Listo de P4: 27
+-----------------------------------
+PROCESO: P5
+Tiempo de Retorno de P5: 15
+Tiempo de Retorno Normalizado de P5: 1.0
+Hora de Finalización de P5: 20
+Tiempo en Estado de Listo de P5: 1
+-----------------------------------
+PROCESO: P6
+Tiempo de Retorno de P6: 21
+Tiempo de Retorno Normalizado de P6: 7.0
+Hora de Finalización de P6: 29
+Tiempo en Estado de Listo de P6: 11
+-----------------------------------
+
+INFORMACIÓN TANDA DE PROCESOS
+
+Tiempo de Retorno de la Tanda: 58
+Tiempo Medio de Retorno: 37.0
+
+-----------------------------------
+
+INFORMACIÓN USO DEL CPU
+
+Tiempo de CPU desocupada: 6
+Tiempo de CPU usada por SO: 19
+Tiempo de CPU usada por los procesos: 78
+Ultimo TFP: 58
+Porcentaje de uso de los procesos de CPU: 100.0%
+
+
+FIN DE LA EJECUCIÓN.
