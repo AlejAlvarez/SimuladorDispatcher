@@ -150,6 +150,9 @@ public class Prioridad extends EstrategiaPriorizadaPreemptiva {
                         }
                         else{
                             pEjecutando.decrementarTRafagaR();
+                            System.out.println("Proceso Ejecutando: " + pEjecutando.getNombre());
+                            bw.write("Proceso Ejecutando: " + pEjecutando.getNombre());
+                            bw.newLine();
                             System.out.println("Tiempo de rafaga restante de " + pEjecutando.getNombre() + ": " + pEjecutando.getTRafagaR());
                             bw.write("Tiempo de rafaga restante de " + pEjecutando.getNombre() + ": " + pEjecutando.getTRafagaR()); 
                             bw.newLine();                        
@@ -157,6 +160,9 @@ public class Prioridad extends EstrategiaPriorizadaPreemptiva {
                     }
                     else{
                         pEjecutando.decrementarTRafagaR();
+                        System.out.println("Proceso Ejecutando: " + pEjecutando.getNombre());
+                        bw.write("Proceso Ejecutando: " + pEjecutando.getNombre());
+                        bw.newLine();
                         System.out.println("Tiempo de rafaga restante de " + pEjecutando.getNombre() + ": " + pEjecutando.getTRafagaR());
                         bw.write("Tiempo de rafaga restante de " + pEjecutando.getNombre() + ": " + pEjecutando.getTRafagaR());    
                         bw.newLine();                 
